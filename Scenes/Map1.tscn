@@ -124,11 +124,10 @@ position = Vector2( 1568, -96 )
 position = Vector2( -32, -1248 )
 
 [node name="ItemSpawners" type="Node2D" parent="."]
-editor/display_folded = true
 z_index = -5
 
 [node name="ItemSpawner" parent="ItemSpawners" instance=ExtResource( 4 )]
-position = Vector2( -31, 32 )
+position = Vector2( -32, -96 )
 
 [node name="ItemSpawner2" parent="ItemSpawners" instance=ExtResource( 4 )]
 position = Vector2( 544, -416 )
