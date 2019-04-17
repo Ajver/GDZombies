@@ -11,6 +11,8 @@ var current_sprite : Sprite = null
 
 func _process(delta):
 	if not is_fading:
+		if Input.is_key_pressed(KEY_SPACE):
+			fade($ParallaxLayer/DoubleKill)
 		return
 	
 	timer += delta
@@ -20,15 +22,15 @@ func _process(delta):
 		
 		if is_fading_in:
 			set_opacity(1.0)
+			set_scale(1.0)
 			$VisibilityTimer.start()
+			$PunchSound.play()
 		else:
 			current_sprite.visible = false
 	
 	else:
-		if is_fading_in:
-			set_opacity(timer / fading_time)
-		else:
-			set_opacity(1.0 - (timer / fading_time))
+		set_opacity(get_progress())
+		set_scale(1.0 + get_inv_progress() * 4.0)
 	
 func fade_in():
 	timer = 0.0
@@ -47,6 +49,10 @@ func _on_VisibilityTimer_timeout():
 func set_opacity(alpha):
 	current_sprite.modulate = Color(1.0, 1.0, 1.0, alpha)
 
+func set_scale(s):
+	current_sprite.scale.x = s
+	current_sprite.scale.y = s
+
 func _on_Player_double_kill():
 	fade($ParallaxLayer/DoubleKill)
 
@@ -57,3 +63,16 @@ func _on_Player_multi_kill():
 func fade(sprite):
 	current_sprite = sprite
 	fade_in()
+
+func get_progress():
+	if is_fading_in:
+		return timer / fading_time
+	else:
+		return 1.0 - (timer / fading_time)
+		
+func get_inv_progress():
+	if is_fading_in:
+		return 1.0 - (timer / fading_time)
+	else:
+		return timer / fading_time
+	

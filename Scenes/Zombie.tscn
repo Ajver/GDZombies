@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Zombie.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Zombie.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Textures/stain2.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/DestroyParticles.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/ZombieSounds.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sounds/blood-hit.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/critical-hit.wav" type="AudioStream" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.5124
@@ -95,6 +97,7 @@ emitting = false
 amount = 12
 lifetime = 0.2
 one_shot = true
+speed_scale = 1.5
 explosiveness = 1.0
 local_coords = false
 process_material = SubResource( 4 )
@@ -118,6 +121,14 @@ texture = ExtResource( 6 )
 script = ExtResource( 7 )
 
 [node name="ZombieSounds" parent="." instance=ExtResource( 8 )]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -7.0
+
+[node name="KilledHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -7.0
 
 [connection signal="bullet_hit" from="." to="BloodParticles" method="_on_Zombie_bullet_hit"]
 [connection signal="died" from="." to="DestroyParticles" method="_on_Zombie_died"]

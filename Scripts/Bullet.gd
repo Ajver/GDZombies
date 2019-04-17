@@ -50,12 +50,13 @@ func die():
 	emit_polykill_signal()
 	queue_free()
 	
-func emit_polykill_signal():	
+func emit_polykill_signal():
 	if killed_zombies <= 1:
-		return	
-	
+		return
+	 
 	if killed_zombies == 2:
 		emit_signal("double_kill")
 	else:
 		emit_signal("multi_kill")
+
 	

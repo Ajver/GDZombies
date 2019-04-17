@@ -66,7 +66,11 @@ func hit(bullet):
 	position += bullet.velocity.normalized() * bullet.damage * bounce_range
 	hp -= bullet.damage
 		
-	if hp <= 0: die(bullet)
+	if hp <= 0: 
+		$KilledHitSound.play()
+		die(bullet)
+	else: 
+		$HitSound.play()
 	
 	emit_signal("bullet_hit", bullet)
 	emit_signal("health_changed", hp)
