@@ -1,4 +1,4 @@
-extends ParallaxBackground
+extends CanvasLayer
 
 export(float) var fading_time = 0.5
 
@@ -9,8 +9,19 @@ var is_fading_in = false
 
 var current_sprite : Sprite = null
 
+func _ready():
+	var screen_size = get_viewport().size
+	var pos = screen_size * 0.5
+	
+	pos.y *= 0.5
+	
+	$DoubleKill.position = pos
+	$MultiKill.position = pos
+
 func _process(delta):
 	if not is_fading:
+		if Input.is_key_pressed(KEY_SPACE):
+			fade($DoubleKill)
 		return
 	
 	timer += delta
@@ -52,10 +63,10 @@ func set_scale(s):
 	current_sprite.scale.y = s
 
 func _on_Player_double_kill():
-	fade($ParallaxLayer/DoubleKill)
+	fade($DoubleKill)
 
 func _on_Player_multi_kill():
-	fade($ParallaxLayer/MultiKill)
+	fade($MultiKill)
 
 func fade(sprite):
 	current_sprite = sprite

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Player.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Gun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/PolyKill.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.479
@@ -41,6 +42,8 @@ shake_time = 0.1
 position = Vector2( 29.9383, 10.1868 )
 
 [node name="PolyKill" parent="." instance=ExtResource( 5 )]
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 
 [connection signal="double_kill" from="." to="PolyKill" method="_on_Player_double_kill"]
 [connection signal="multi_kill" from="." to="PolyKill" method="_on_Player_multi_kill"]

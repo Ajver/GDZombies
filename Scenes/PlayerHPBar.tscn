@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Textures/HPBackground.png" type="Texture" id=1]
+[ext_resource path="res://Textures/HPShadow.png" type="Texture" id=2]
+[ext_resource path="res://Textures/HPBar.png" type="Texture" id=3]
+
+[node name="HPBar" type="Node2D"]
+position = Vector2( 4.75653, -25.2064 )
+scale = Vector2( 2, 2 )
+
+[node name="HPBackground" type="TextureProgress" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 55.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+
+[node name="HP" type="TextureProgress" parent="."]
+margin_right = 200.0
+margin_bottom = 40.0
+value = 40.0
+texture_progress = ExtResource( 3 )
+
