@@ -16,16 +16,11 @@ var max_damage = strange+delta_strange
 
 var killed_zombies : int = 0
 
-var destroy_now = false
-
 func _ready():
 	damage = strange + randf() * delta_strange
 
 func _process(delta):
-	if destroy_now:
-		queue_free()
-	else:
-		position += velocity * delta
+	position += velocity * delta
 
 func set_direction(dir):
 	velocity = dir * speed
@@ -38,17 +33,22 @@ func _on_Bullet_body_entered(body):
 	if body is Zombie:
 		body.hit(self)
 		if body.is_alive:
-			emit_polykill_signal()
-			queue_free()
+			die()
 		else:
+			damage -= 5
 			killed_zombies += 1
+			if killed_zombies >= 3:
+				die()
 	elif body.name == "Walls":
 		var DestroyedBullet = load("res://Scenes/DestroyedBullet.tscn")
 		var db = DestroyedBullet.instance()
 		get_parent().add_child(db)
 		db.position = self.global_position
-		emit_polykill_signal()
-		queue_free()
+		die()
+	
+func die():
+	emit_polykill_signal()
+	queue_free()
 	
 func emit_polykill_signal():
 	print("Killed zombies: ", killed_zombies)

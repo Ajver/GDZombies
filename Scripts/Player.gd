@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal double_kill()
+signal multi_kill()
+
 export(float) var speed = 400
 
 var velocity : Vector2 = Vector2(0, 0)
@@ -38,12 +41,10 @@ func set_rotation_from_mouse(event):
 	self.rotation = angle
 
 func _on_Bullet_double_kill():
-	print("DOUBLE killl!")
-	pass
+	emit_signal("double_kill")
 	
 func _on_Bullet_multi_kill():
-	print("MULTI xd killl!")
-	pass
+	emit_signal("multi_kill")
 	
 	
 	
