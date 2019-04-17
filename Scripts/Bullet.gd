@@ -37,20 +37,24 @@ func _on_Bullet_body_entered(body):
 
 	if body is Zombie:
 		body.hit(self)
-		killed_zombies += 1
 		if body.is_alive:
 			emit_polykill_signal()
 			queue_free()
+		else:
+			killed_zombies += 1
 	elif body.name == "Walls":
 		var DestroyedBullet = load("res://Scenes/DestroyedBullet.tscn")
 		var db = DestroyedBullet.instance()
 		get_parent().add_child(db)
 		db.position = self.global_position
+		emit_polykill_signal()
 		queue_free()
 	
 func emit_polykill_signal():
+	print("Killed zombies: ", killed_zombies)
+	
 	if killed_zombies <= 1:
-		return
+		return	
 	
 	if killed_zombies == 2:
 		emit_signal("double_kill")

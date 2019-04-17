@@ -38,10 +38,11 @@ func set_rotation_from_mouse(event):
 	self.rotation = angle
 
 func _on_Bullet_double_kill():
-	
+	print("DOUBLE killl!")
 	pass
 	
 func _on_Bullet_multi_kill():
+	print("MULTI xd killl!")
 	pass
 	
 	
