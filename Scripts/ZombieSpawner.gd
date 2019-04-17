@@ -11,9 +11,7 @@ func _on_NextZombieTimer_timeout():
 	if not zombie_pool.has_next():
 		return
 		
-	var z = zombie_pool.pop_next()
+	var z = zombie_pool.pop_next(self.position)
 	map.add_child(z)
-	
-	z.position = self.position
 	
 	$NextZombieTimer.wait_time += (randf() - 0.5) * delta_wait_time  

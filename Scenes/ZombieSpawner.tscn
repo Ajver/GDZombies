@@ -2,13 +2,12 @@
 
 [ext_resource path="res://Scripts/ZombieSpawner.gd" type="Script" id=1]
 
-
 [node name="ZombieSpawner" type="Node2D"]
 script = ExtResource( 1 )
-delta_wait_time = 1.0
+delta_wait_time = 2.0
 
 [node name="NextZombieTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 8.0
 autostart = true
 
 [connection signal="timeout" from="NextZombieTimer" to="." method="_on_NextZombieTimer_timeout"]

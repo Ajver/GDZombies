@@ -11,8 +11,6 @@ var current_sprite : Sprite = null
 
 func _process(delta):
 	if not is_fading:
-		if Input.is_key_pressed(KEY_SPACE):
-			fade($ParallaxLayer/DoubleKill)
 		return
 	
 	timer += delta
@@ -57,8 +55,7 @@ func _on_Player_double_kill():
 	fade($ParallaxLayer/DoubleKill)
 
 func _on_Player_multi_kill():
-	# TODO - add multikill sprite
-	fade($ParallaxLayer/DoubleKill)
+	fade($ParallaxLayer/MultiKill)
 
 func fade(sprite):
 	current_sprite = sprite

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/PolyKill.gd" type="Script" id=1]
 [ext_resource path="res://Textures/DoubleKill.png" type="Texture" id=2]
-[ext_resource path="res://Sounds/punch.wav" type="AudioStream" id=3]
+[ext_resource path="res://Textures/MultiKill.png" type="Texture" id=3]
+[ext_resource path="res://Sounds/punch.wav" type="AudioStream" id=4]
 
 [node name="PolyKill" type="ParallaxBackground"]
 layer = 1
@@ -17,11 +18,15 @@ motion_scale = Vector2( 0, 0 )
 visible = false
 texture = ExtResource( 2 )
 
+[node name="MultiKill" type="Sprite" parent="ParallaxLayer"]
+visible = false
+texture = ExtResource( 3 )
+
 [node name="VisibilityTimer" type="Timer" parent="."]
 wait_time = 0.85
 one_shot = true
 
 [node name="PunchSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
 
 [connection signal="timeout" from="VisibilityTimer" to="." method="_on_VisibilityTimer_timeout"]
