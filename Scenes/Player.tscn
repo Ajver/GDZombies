@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Textures/Player.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Gun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/ftDoubleKill.tscn" type="PackedScene" id=5]
+
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.479
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 10.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+script = ExtResource( 3 )
+shake_power = 6.0
+shake_time = 0.1
+
+[node name="Gun" parent="." instance=ExtResource( 4 )]
+position = Vector2( 29.9383, 10.1868 )
+
+[node name="DoubleKill" type="ParallaxBackground" parent="."]
+layer = 1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="DoubleKill"]
+z_index = 50
+z_as_relative = false
+motion_scale = Vector2( 0, 0 )
+
+[node name="DoubleKill" parent="DoubleKill/ParallaxLayer" instance=ExtResource( 5 )]
+position = Vector2( 0, -300 )
+

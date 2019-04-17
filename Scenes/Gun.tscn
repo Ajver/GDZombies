@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Gun.gd" type="Script" id=1]
+[ext_resource path="res://Sounds/shot.wav" type="AudioStream" id=2]
+
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 0.21582, 0.21582, 0.21582, 1, 0.696289, 0.696289, 0.696289, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.0109065, 0.0181999 ), 0.0, 0.0, 0, 0, Vector2( 0.25457, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 181.67
+initial_velocity_random = 0.79
+angular_velocity = 566.4
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+angle = 96.0
+angle_random = 1.0
+scale = 8.0
+scale_curve = SubResource( 2 )
+color_ramp = SubResource( 5 )
+
+[node name="Gun" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="NextShotTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+autostart = true
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -17.0
+
+[node name="ShotParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.16
+one_shot = true
+explosiveness = 0.4
+process_material = SubResource( 3 )
+
+[connection signal="timeout" from="NextShotTimer" to="." method="_on_NextShotTimer_timeout"]

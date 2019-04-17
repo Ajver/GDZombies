@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sounds/zombie1.wav" type="AudioStream" id=1]
+[ext_resource path="res://Sounds/zombie2.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sounds/zombie3.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/zombie4.wav" type="AudioStream" id=4]
+
+[node name="ZombieSounds" type="Node2D"]
+
+[node name="ZombieSound1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -15.6
+
+[node name="ZombieSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -15.6
+
+[node name="ZombieSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.6
+
+[node name="ZombieSound4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.6
+

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/DoubleKill.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ftDoubleKill.tscn" type="PackedScene" id=2]
+
+
+[node name="DoubleKill" type="ParallaxBackground"]
+layer = 1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+z_index = 50
+z_as_relative = false
+motion_scale = Vector2( 0, 0 )
+
+[node name="DoubleKill" type="Node2D" parent="ParallaxLayer" instance=ExtResource( 2 )]
+position = Vector2( 0, -300 )
+script = ExtResource( 1 )
+fading_time = 0.3
+

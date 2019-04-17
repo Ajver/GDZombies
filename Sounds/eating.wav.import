@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/eating.wav-cb6c61f11b9e768c4aa997f0c2e471b7.sample"
+
+[deps]
+
+source_file="res://Sounds/eating.wav"
+dest_files=[ "res://.import/eating.wav-cb6c61f11b9e768c4aa997f0c2e471b7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

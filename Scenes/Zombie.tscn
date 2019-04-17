@@ -1,0 +1,126 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scripts/Zombie.gd" type="Script" id=1]
+[ext_resource path="res://Textures/Zombie.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/HPBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Textures/stain1.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/BloodParticles.gd" type="Script" id=5]
+[ext_resource path="res://Textures/stain2.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/DestroyParticles.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/ZombieSounds.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.5124
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.713647, 0.8432 ), -0.830652, -0.830652, 0, 0, Vector2( 1, 0.236 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+spread = 19.8
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 206.66
+initial_velocity_random = 1.0
+angular_velocity = 184.45
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 94.0
+angle_random = 1.0
+scale = 4.0
+scale_curve = SubResource( 3 )
+color = Color( 0.721569, 0.14902, 0.0196078, 1 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.48855, 1 )
+colors = PoolColorArray( 0.0392157, 0.513726, 0.0117647, 1, 0.338675, 0.145573, 0.0176745, 1, 0.273438, 0.102639, 0.0192261, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.8278 ), 0.0, 0.0, 0, 0, Vector2( 0.830182, 0.8718 ), -0.926498, -0.926498, 0, 0, Vector2( 1, 0.0907999 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 9.53
+flag_disable_z = true
+spread = 66.7
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 233.33
+initial_velocity_random = 0.5
+angular_velocity = 163.2
+angular_velocity_random = 1.0
+orbit_velocity = 0.1
+orbit_velocity_random = 1.0
+damping = 100.0
+angle = 91.6
+angle_random = 1.0
+scale = 4.0
+scale_random = 0.81
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+
+[node name="Zombie" type="KinematicBody2D"]
+script = ExtResource( 1 )
+speed = 75.0
+bounce_range = 0.66
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="HPBar" parent="." instance=ExtResource( 3 )]
+position = Vector2( -50, -55 )
+
+[node name="VanishTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BloodParticles" type="Particles2D" parent="."]
+show_behind_parent = true
+position = Vector2( 32, 0 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 12
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
+
+[node name="NextSoundTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="DestroyParticles" type="Particles2D" parent="."]
+position = Vector2( 22, 1 )
+emitting = false
+amount = 30
+lifetime = 0.9
+one_shot = true
+speed_scale = 2.2
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 9 )
+texture = ExtResource( 6 )
+script = ExtResource( 7 )
+
+[node name="ZombieSounds" parent="." instance=ExtResource( 8 )]
+
+[connection signal="bullet_hit" from="." to="BloodParticles" method="_on_Zombie_bullet_hit"]
+[connection signal="died" from="." to="DestroyParticles" method="_on_Zombie_died"]
+[connection signal="health_changed" from="." to="HPBar" method="_on_Zombie_health_changed"]
+[connection signal="timeout" from="VanishTimer" to="." method="_on_VanishTimer_timeout"]
+[connection signal="timeout" from="NextSoundTimer" to="." method="_on_NextSoundTimer_timeout"]

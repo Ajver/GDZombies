@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/ItemSpawner.gd" type="Script" id=1]
+[ext_resource path="res://Textures/ItemSpawner.png" type="Texture" id=2]
+
+[node name="ItemSpawner" type="Node2D"]
+script = ExtResource( 1 )
+delta_wait_time = 2.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="NextItemTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="NextItemTimer" to="." method="_on_NextItemTimer_timeout"]
