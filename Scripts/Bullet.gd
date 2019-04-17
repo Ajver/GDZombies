@@ -50,9 +50,7 @@ func die():
 	emit_polykill_signal()
 	queue_free()
 	
-func emit_polykill_signal():
-	print("Killed zombies: ", killed_zombies)
-	
+func emit_polykill_signal():	
 	if killed_zombies <= 1:
 		return	
 	
