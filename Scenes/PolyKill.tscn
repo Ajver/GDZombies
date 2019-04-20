@@ -1,33 +1,16 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/PolyKill.gd" type="Script" id=1]
-[ext_resource path="res://Sounds/punch.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scenes/PolyKillAnim.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Textures/DoubleKill.png" type="Texture" id=3]
 [ext_resource path="res://Textures/MultiKill.png" type="Texture" id=4]
 
 [node name="PolyKill" type="CanvasLayer"]
 script = ExtResource( 1 )
-fading_time = 0.1
 
-[node name="VisibilityTimer" type="Timer" parent="."]
-wait_time = 0.85
-one_shot = true
-
-[node name="PunchSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-
-[node name="DoubleKill" type="Sprite" parent="."]
-visible = false
-position = Vector2( 6.81628, -195.32 )
-z_index = 100
-z_as_relative = false
+[node name="DoubleKill" parent="." instance=ExtResource( 2 )]
 texture = ExtResource( 3 )
 
-[node name="MultiKill" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0, -6.73718 )
-z_index = 100
-z_as_relative = false
+[node name="MultiKill" parent="." instance=ExtResource( 2 )]
 texture = ExtResource( 4 )
 
-[connection signal="timeout" from="VisibilityTimer" to="." method="_on_VisibilityTimer_timeout"]
