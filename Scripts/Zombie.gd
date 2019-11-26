@@ -22,6 +22,9 @@ onready var sounds = [
 	$ZombieSounds/ZombieSound4
 ]
 
+func _ready() -> void:
+	connect("died", GameData, "_on_Zomie_died")
+
 func disable_self():
 	setup(false)
 	$NextSoundTimer.stop()
